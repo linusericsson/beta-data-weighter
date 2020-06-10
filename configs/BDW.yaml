@@ -1,0 +1,63 @@
+exp:
+    benchmark: 'autoencoder-mnist'
+    name: 'BDW'
+    seed: 1
+    mode: 'default'
+device: 'cuda:0'
+trainer:
+    algorithm: 'meta-gradient'
+    num_epochs: 100
+data:
+    datasets:
+        - 'mnist'
+        - 'fashionmnist'
+        - 'kmnist'
+    test_set: 'mnist'
+    split_mode: 'train_val_test'
+    channels: 1
+    resize: 28
+    cropsize: 28
+    no_crop: True
+    h_flips: False
+    training:
+        mode: 'self-supervised'
+        task: 'reconstruction'
+        batch_size: 64
+    validation:
+        mode: 'self-supervised'
+        task: 'reconstruction'
+        batch_size: 64
+    test:
+        mode: 'self-supervised'
+        task: 'reconstruction'
+        batch_size: 64
+model:
+    arch: 'mlp'
+    hidden_dim: 1
+    beta: 1
+    new_weights: False
+    optimizer: 'sgd'
+    lr: 0.0001
+    lr_gamma: 1
+    momentum: 0.
+    dampening: 0.
+    nesterov: False
+    wd: 0
+    new_weights: False
+    fixed: False
+weights:
+    type: 'transductive'
+    arch: 'beta-weights'
+    optimizer: 'sgd'
+    lr: 10
+    lr_gamma: 1
+    momentum: 0.9
+    normalise: False
+    max_grad_norm: 10
+    clamp_at_zero: False
+    clamp_at_one: False
+    steps: 1
+    pruning:
+        mode: 'cdf'
+        epsilon: 0.5
+        delta: 0.5
