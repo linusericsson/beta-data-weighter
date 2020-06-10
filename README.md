@@ -8,4 +8,4 @@ $ conda activate bdw
 $ pip install -r requirements.txt
 $ python download_and_split_datasets.py
 $ python main.py BDW.yaml
-´´´
+```
